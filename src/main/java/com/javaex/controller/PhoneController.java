@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,10 +62,25 @@ public class PhoneController {
 
 		return "/WEB-INF/views/updateForm.jsp";
 	}
+	
+	// ------------------------------ Update Form222 ------------------------------//
+	@RequestMapping(value = "/updateForm2", method = { RequestMethod.GET, RequestMethod.POST })
+	public String updateForm2(@RequestParam("no") int personId, Model model) {
+		
+		System.out.println("PhoneController.updateForm2");
+		System.out.println(personId);
+		Map<String, Object> personMap = phoneDao.getPerson2(personId);
+		
+		model.addAttribute("pMap", personMap);
+		
+		return "/WEB-INF/views/updateForm2.jsp";
+	}
 
 	// ------------------------------ Update Function ------------------------------//
 	@RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public String update(@ModelAttribute PersonVo personVo) {
+		System.out.println("[Update]");
+		
 
 		// @ModelAttribute --> new PersonVo()
 		// --> 기본생성자 + setter
@@ -96,6 +112,24 @@ public class PhoneController {
 		phoneDao.personInsert(personVo);
 		return "redirect:./list";
 	}
+	
+	//
+	//쓰기2
+	//파라미터로 받을때
+	
+	@RequestMapping(value="/write2", method = {RequestMethod.GET, RequestMethod.POST})
+	public String write2(@RequestParam("name") String name,
+						 @RequestParam("hp") String hp,	
+						 @RequestParam("company") String company){
+		
+		System.out.println(name);
+		System.out.println(hp);
+		System.out.println(company);
+		
+		int count = phoneDao.personInsert2(name, hp, company);
+		return  "redirect:./list";
+	}
+	
 
 	// ------------------------------ Delete Function ------------------------------//
 	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })

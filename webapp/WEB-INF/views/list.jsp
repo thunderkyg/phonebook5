@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<td><a href="${pageContext.request.contextPath}/pb/delete?no=${pList.personId}">[삭제]</a></td>
-				<td><a href="${pageContext.request.contextPath}/pb/updateForm?no=${pList.personId}">[수정]</a></td>
+				<td><a href="${pageContext.request.contextPath}/pb/updateForm2?no=${pList.personId}">[수정]</a></td>
 			</tr>
 		</table>
 		<br>
